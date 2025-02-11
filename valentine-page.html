@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+    margin: 0;
+    overflow: hidden;
+    background: #ffe6e6;
+    font-family: 'Arial', sans-serif;
+}
+
+.slide {
+    display: none;
+    height: 100vh;
+    width: 100%;
+    text-align: center;
+    background: linear-gradient(45deg, #ffe6e6, #ffb3b3);
+    position: relative;
+    animation: fadeIn 1s;
+}
+
+.slide.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.background-heart {
+    position: absolute;
+    font-size: 100px;
+    color: rgba(255, 182, 193, 0.3);
+    pointer-events: none;
+    animation: float 6s infinite ease-in-out;
+}
+
+.background-flower {
+    position: absolute;
+    font-size: 80px;
+    color: rgba(255, 182, 193, 0.3);
+    pointer-events: none;
+    animation: floatFlower 7s infinite ease-in-out;
+}
+
+.content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(255, 102, 153, 0.4);
+    position: relative;
+    z-index: 2;
+    transform: scale(1);
+    transition: transform 0.3s;
+    overflow-y: auto;
+    max-height: 80vh;
+}
+
+.content:hover {
+    transform: scale(1.02);
+}
+
+.title {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #ff0066;
+    text-shadow: 2px 2px 4px rgba(255, 0, 102, 0.2);
+}
+
+.text {
+    font-size: 22px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #ff3385;
+    text-align: left;
+}
+
+.reasons {
+    text-align: left;
+    margin: 20px 0;
+    color: #ff3385;
+}
+
+.reason {
+    margin: 15px 0;
+    font-size: 20px;
+    padding-left: 20px;
+}
+
+.button {
+    background-color: #ff66b3;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 20px;
+    margin: 10px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.button:hover {
+    background-color: #ff1a8c;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255, 26, 140, 0.4);
+}
+
+.celebration {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+    display: none;
+}
+
+.final-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 50px rgba(255, 0, 102, 0.6);
+    z-index: 1001;
+    display: none;
+    animation: popIn 0.5s ease-out;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(10deg); }
+}
+
+@keyframes floatFlower {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-25px) rotate(15deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes popIn {
+    0% { transform: translate(-50%, -50%) scale(0); }
+    80% { transform: translate(-50%, -50%) scale(1.1); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.no-button {
+    position: relative;
+    animation: moveAway 0.5s infinite;
+}
+
+@keyframes moveAway {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(var(--x), var(--y)); }
+}
+</style>
+</head>
+<body>
+
+<div id="slides-container">
+    <div class="slide active" id="slide1">
+        <div class="content">
+            <div class="title">💖 Mi Amor 💖</div>
+            <div class="text">¿Sabes? He estado pensando en todas las formas de decirte lo que siento, pero ninguna me parecía suficiente. Así que decidí hacer algo diferente...</div>
+            <button class="button" onclick="nextSlide()">Continuar ➡️</button>
+        </div>
+    </div>
+
+    <div class="slide" id="slide2">
+        <div class="content">
+            <div class="title">✨ Las Primeras Razones ✨</div>
+            <div class="reasons">
+                1. Por cómo tus ojos brillan cuando hablas de lo que te apasiona<br><br>
+                2. Por la forma en que tu risa ilumina hasta el día más gris<br><br>
+                3. Por tu manera única de ver el mundo y hacerme verlo diferente<br><br>
+                4. Por cómo me apoyas en mis locuras y me anclas en mis dudas<br><br>
+                5. Por los bailes improvisados en la cocina
+            </div>
+            <button class="button" onclick="nextSlide()">Siguiente ➡️</button>
+        </div>
+    </div>
+
+    <div class="slide" id="slide3">
+        <div class="content">
+            <div class="title">💝 Más Razones Para Amarte 💝</div>
+            <div class="reasons">
+                6. Por tus abrazos que sanan cualquier mal día<br><br>
+                7. Por cómo haces que lo ordinario se vuelva extraordinario<br><br>
+                8. Por la paz que siento cuando estoy contigo<br><br>
+                9. Por tu forma de quererme, incluso en mis momentos más difíciles<br><br>
+                10. Por cómo me inspiras a ser mejor persona
+            </div>
+            <button class="button" onclick="nextSlide()">Continuar ➡️</button>
+        </div>
+    </div>
+
+    <div class="slide" id="slide4">
+        <div class="content">
+            <div class="title">🌟 Las Últimas Razones 🌟</div>
+            <div class="reasons">
+                11. Por los planes que hacemos juntos y los sueños que compartimos<br><br>
+                12. Por la magia que traes a mi vida cada día<br><br>
+                13. Por ser mi mejor amiga y mi amor<br><br>
+                14. Por ser tú, simplemente tú
+            </div>
+            <button class="button" onclick="nextSlide()">Momento Especial ➡️</button>
+        </div>
+    </div>
+
+    <div class="slide" id="slide5">
+        <div class="content">
+            <div class="title">💘 Mi Amor 💘</div>
+            <div class="text" style="font-size: 24px; text-align: center;">Y ahora, el día 14, no solo quiero decirte que te amo, sino preguntarte algo especial:</div>
+            <div class="text" style="font-size: 28px; text-align: center; margin: 30px 0;">¿Me harías el honor de ser mi San Valentín hoy y todos los días que están por venir?</div>
+            <div style="display: flex; justify-content: center; gap: 20px;">
+                <button class="button" onclick="celebrate()" style="background-color: #ff1a75;">¡SÍ! 💖</button>
+                <button class="button no-button" onmouseover="moveButton(this)" style="background-color: #999;">No 💔</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="celebration" id="celebration"></div>
+<div class="final-message" id="finalMessage">
+    <div class="title">¡¡YA SABÍA QUE DIRÍAS QUE SÍ!! 💖💖💖</div>
+    <div class="text" style="text-align: center;">Eres lo mejor que me ha pasado en la vida 😊</div>
+    <div class="text" style="text-align: center; font-size: 26px; color: #ff1a75;">
+        Te amo demasiado, más de lo que las palabras pueden expresar. 
+        Cada día mi amor por ti crece más y más. 
+        Eres mi todo, mi razón de sonreír, mi felicidad completa. 
+        ¡Te amo infinitamente! 💖✨🌹
+    </div>
+</div>
+
+<script>
+let currentSlide = 1;
+const totalSlides = 5;
+
+function createBackgroundElements() {
+    const flowerEmojis = ['🌸', '🌹', '🌺', '🌷', '🌻'];
+    
+    // Create hearts
+    for (let i = 0; i < 15; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'background-heart';
+        heart.innerHTML = '❤️';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.top = Math.random() * 100 + 'vh';
+        heart.style.animationDelay = Math.random() * 5 + 's';
+        document.body.appendChild(heart);
+    }
+    
+    // Create flowers
+    for (let i = 0; i < 15; i++) {
+        const flower = document.createElement('div');
+        flower.className = 'background-flower';
+        flower.innerHTML = flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
+        flower.style.left = Math.random() * 100 + 'vw';
+        flower.style.top = Math.random() * 100 + 'vh';
+        flower.style.animationDelay = Math.random() * 5 + 's';
+        document.body.appendChild(flower);
+    }
+}
+
+function nextSlide() {
+    if (currentSlide < totalSlides) {
+        document.getElementById(`slide${currentSlide}`).classList.remove('active');
+        currentSlide++;
+        document.getElementById(`slide${currentSlide}`).classList.add('active');
+    }
+}
+
+function moveButton(button) {
+    const x = (Math.random() - 0.5) * 400;
+    const y = (Math.random() - 0.5) * 400;
+    button.style.setProperty('--x', x + 'px');
+    button.style.setProperty('--y', y + 'px');
+}
+
+function createHeart() {
+    const heart = document.createElement('div');
+    heart.innerHTML = Math.random() < 0.5 ? '❤️' : '🌹';
+    heart.style.position = 'fixed';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.top = Math.random() * 100 + 'vh';
+    heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
+    heart.style.animation = `float ${Math.random() * 3 + 2}s linear`;
+    heart.style.zIndex = '1000';
+    document.getElementById('celebration').appendChild(heart);
+    
+    setTimeout(() => heart.remove(), 2000);
+}
+
+function celebrate() {
+    const celebration = document.getElementById('celebration');
+    const finalMessage = document.getElementById('finalMessage');
+    celebration.style.display = 'block';
+    
+    // Explosión de corazones y flores
+    for (let i = 0; i < 100; i++) {
+        setTimeout(createHeart, i * 50);
+    }
+    
+    // Mostrar mensaje final
+    setTimeout(() => {
+        finalMessage.style.display = 'block';
+    }, 1000);
+}
+
+// Inicializar elementos de fondo
+createBackgroundElements();
+</script>
+
+</body>
+</html>
